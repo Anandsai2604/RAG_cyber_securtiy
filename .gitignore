@@ -1,0 +1,17 @@
+backend/config.json
+backend/dt_model.pkl
+backend/lightgbm_model.pkl
+backend/logistic_regression_model.pkl
+backend/modelner/
+backend/json/
+backend/model.safetensors
+backend/random_forest_model.pkl
+backend/special_tokens_map.json
+backend/svm_model.pkl
+backend/tokenizer.json
+backend/tokenizer_config.json
+backend/training_args.bin
+back/*
+
+front/node_modules
+# front/front/node_modules
