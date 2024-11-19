@@ -11,10 +11,10 @@ const port = 8080;
 
 app.use(bodyParser.json());
 app.use(cors());
-const pythonExecutable = process.env.PYTHON_EXEC || 'C:\\Users\\Anand\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe';
-const scriptBasePath = process.env.SCRIPT_PATH || 'C:\\Users\\Anand\\Desktop\\cyber\\back\\back\\src\\serv\\';
+const pythonExecutable = process.env.PYTHON_EXEC || 'python.exe path;
+const scriptBasePath = process.env.SCRIPT_PATH || '';
 
-mongoose.connect('mongodb+srv://Anand:Anand+26042005@data.wlaczyu.mongodb.net/cybersec', {
+mongoose.connect('mongodb+srv://dbname:<password>.wlaczyu.mongodb.net/cybersec', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -67,7 +67,7 @@ app.post('/register', async (req, res) => {
         await user.save();
 
         const mailOptions = {
-            from: 'kmitprojectschoolcrick@gmail.com',
+            from: 'k',
             to: email,
             subject: 'Your OTP for registration is',
             text: `Your OTP is ${otp}. It is valid for 10 minutes`
