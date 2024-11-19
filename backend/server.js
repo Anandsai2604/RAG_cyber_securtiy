@@ -101,46 +101,46 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// const executePythonScript = (scriptName, args = [], callback) => {
-//     const scriptPath = `${scriptBasePath}${scriptName}`;
-//     const response = spawn(pythonExecutable, [scriptPath, ...args]);
+const executePythonScript = (scriptName, args = [], callback) => {
+    const scriptPath = `${scriptBasePath}${scriptName}`;
+    const response = spawn(pythonExecutable, [scriptPath, ...args]);
 
-//     let dataFromPython = '';
-//     let errorOccurred = false;
+    let dataFromPython = '';
+    let errorOccurred = false;
 
-//     response.stdout.on('data', (data) => {
-//         dataFromPython += data.toString();
-//     });
+    response.stdout.on('data', (data) => {
+        dataFromPython += data.toString();
+    });
 
-//     response.stderr.on('data', (data) => {
-//         console.error(`Error from Python script: ${data}`);
-//         if (!errorOccurred) {
-//             errorOccurred = true;
-//             callback({ error: 'Internal Server Error: Error from Python script' });
-//         }
-//     });
+    response.stderr.on('data', (data) => {
+        console.error(`Error from Python script: ${data}`);
+        if (!errorOccurred) {
+            errorOccurred = true;
+            callback({ error: 'Internal Server Error: Error from Python script' });
+        }
+    });
 
-//     response.on('close', (code) => {
-//         if (!errorOccurred) {
-//             try {
-//                 const jsonData = JSON.parse(dataFromPython);
-//                 console.log("Data received from Python script:", jsonData);
-//                 callback(null, jsonData);
-//             } catch (error) {
-//                 console.error('Error parsing JSON:', error);
-//                 callback({ error: 'Internal Server Error: Error parsing JSON' });
-//             }
-//         }
-//     });
+    response.on('close', (code) => {
+        if (!errorOccurred) {
+            try {
+                const jsonData = JSON.parse(dataFromPython);
+                console.log("Data received from Python script:", jsonData);
+                callback(null, jsonData);
+            } catch (error) {
+                console.error('Error parsing JSON:', error);
+                callback({ error: 'Internal Server Error: Error parsing JSON' });
+            }
+        }
+    });
 
-//     response.on('error', (error) => {
-//         console.error('Error executing Python script:', error);
-//         if (!errorOccurred) {
-//             errorOccurred = true;
-//             callback({ error: 'Internal Server Error: Error executing Python script' });
-//         }
-//     });
-// };
+    response.on('error', (error) => {
+        console.error('Error executing Python script:', error);
+        if (!errorOccurred) {
+            errorOccurred = true;
+            callback({ error: 'Internal Server Error: Error executing Python script' });
+        }
+    });
+};
 
 
 // // app.post('/save-chat', async (req, res) => {
@@ -155,16 +155,16 @@ app.post('/login', async (req, res) => {
 // //     }
 // // });
 
-// // app.get('/chat-history/:userId', async (req, res) => {
-// //     const { userId } = req.params;
+// app.get('/chat-history/:userId', async (req, res) => {
+//     const { userId } = req.params;
 
-// //     try {
-// //         const chatHistory = await Chat.find({ userId }).sort({ timestamp: -1 });
-// //         return res.status(200).json(chatHistory);
-// //     } catch (error) {
-// //         return res.status(500).json({ error: 'Failed to retrieve chat history' });
-// //     }
-// // });
+//     try {
+//         const chatHistory = await Chat.find({ userId }).sort({ timestamp: -1 });
+//         return res.status(200).json(chatHistory);
+//     } catch (error) {
+//         return res.status(500).json({ error: 'Failed to retrieve chat history' });
+//     }
+// });
 
 
 app.post('/knn', async (req, res) => {
@@ -185,105 +185,105 @@ app.post('/knn', async (req, res) => {
     });
 });
 
-// app.post('/dt', async (req, res) => {
-//     const { input_sentence } = req.body;
-//     if (!input_sentence) {
-//         return res.status(400).json({ error: 'Input sentence is required' });
-//     }
-//     console.log("Received input sentence:", input_sentence);
+app.post('/dt', async (req, res) => {
+    const { input_sentence } = req.body;
+    if (!input_sentence) {
+        return res.status(400).json({ error: 'Input sentence is required' });
+    }
+    console.log("Received input sentence:", input_sentence);
     
-//     executePythonScript('dt.py', [input_sentence], (error, data) => {
-//         if (error) return res.status(500).json(error);
+    executePythonScript('dt.py', [input_sentence], (error, data) => {
+        if (error) return res.status(500).json(error);
         
-//         if (data) {
-//             return res.status(200).json(data);
-//         } else {
-//             return res.status(400).json({ error: 'No response from KNN model' });
-//         }
-//     });
-// });
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(400).json({ error: 'No response from KNN model' });
+        }
+    });
+});
 
-// app.post('/lr', async (req, res) => {
-//     const { input_sentence } = req.body;
-//     if (!input_sentence) {
-//         return res.status(400).json({ error: 'Input sentence is required' });
-//     }
-//     console.log("Received input sentence:", input_sentence);
+app.post('/lr', async (req, res) => {
+    const { input_sentence } = req.body;
+    if (!input_sentence) {
+        return res.status(400).json({ error: 'Input sentence is required' });
+    }
+    console.log("Received input sentence:", input_sentence);
     
-//     executePythonScript('lr.py', [input_sentence], (error, data) => {
-//         if (error) return res.status(500).json(error);
+    executePythonScript('lr.py', [input_sentence], (error, data) => {
+        if (error) return res.status(500).json(error);
         
-//         if (data) {
-//             return res.status(200).json(data);
-//         } else {
-//             return res.status(400).json({ error: 'No response from KNN model' });
-//         }
-//     });
-// });
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(400).json({ error: 'No response from KNN model' });
+        }
+    });
+});
 
-// app.post('/gb', async (req, res) => {
-//     const { input_sentence } = req.body;
-//     if (!input_sentence) {
-//         return res.status(400).json({ error: 'Input sentence is required' });
-//     }
-//     console.log("Received input sentence:", input_sentence);
+app.post('/gb', async (req, res) => {
+    const { input_sentence } = req.body;
+    if (!input_sentence) {
+        return res.status(400).json({ error: 'Input sentence is required' });
+    }
+    console.log("Received input sentence:", input_sentence);
     
-//     executePythonScript('gb.py', [input_sentence], (error, data) => {
-//         if (error) return res.status(500).json(error);
+    executePythonScript('gb.py', [input_sentence], (error, data) => {
+        if (error) return res.status(500).json(error);
         
-//         if (data) {
-//             return res.status(200).json(data);
-//         } else {
-//             return res.status(400).json({ error: 'No response from KNN model' });
-//         }
-//     });
-// });
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(400).json({ error: 'No response from KNN model' });
+        }
+    });
+});
 
-// app.post('/rf', async (req, res) => {
-//     const { input_sentence } = req.body;
-//     if (!input_sentence) {
-//         return res.status(400).json({ error: 'Input sentence is required' });
-//     }
-//     console.log("Received input sentence:", input_sentence);
+app.post('/rf', async (req, res) => {
+    const { input_sentence } = req.body;
+    if (!input_sentence) {
+        return res.status(400).json({ error: 'Input sentence is required' });
+    }
+    console.log("Received input sentence:", input_sentence);
     
-//     executePythonScript('rf.py', [input_sentence], (error, data) => {
-//         if (error) return res.status(500).json(error);
+    executePythonScript('rf.py', [input_sentence], (error, data) => {
+        if (error) return res.status(500).json(error);
         
-//         if (data) {
-//             return res.status(200).json(data);
-//         } else {
-//             return res.status(400).json({ error: 'No response from KNN model' });
-//         }
-//     });
-// });
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(400).json({ error: 'No response from KNN model' });
+        }
+    });
+});
 
-// app.post('/svm', async (req, res) => {
-//     const { input_sentence } = req.body;
-//     if (!input_sentence) {
-//         return res.status(400).json({ error: 'Input sentence is required' });
-//     }
-//     console.log("Received input sentence:", input_sentence);
+app.post('/svm', async (req, res) => {
+    const { input_sentence } = req.body;
+    if (!input_sentence) {
+        return res.status(400).json({ error: 'Input sentence is required' });
+    }
+    console.log("Received input sentence:", input_sentence);
     
-//     executePythonScript('svm.py', [input_sentence], (error, data) => {
-//         if (error) return res.status(500).json(error);
+    executePythonScript('svm.py', [input_sentence], (error, data) => {
+        if (error) return res.status(500).json(error);
         
-//         if (data) {
-//             return res.status(200).json(data);
-//         } else {
-//             return res.status(400).json({ error: 'No response from KNN model' });
-//         }
-//     });
-// });
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(400).json({ error: 'No response from KNN model' });
+        }
+    });
+});
 
-// app.post('/news', async (req, res) => {
-//     console.log('Fetching news');
-//     executePythonScript('news.py', [], (error, data) => {
-//         if (error) {
-//             return res.status(500).json({ error: 'Failed to fetch news' });
-//         }
-//         res.json(data);
-//     });
-// });
+app.post('/news', async (req, res) => {
+    console.log('Fetching news');
+    executePythonScript('news.py', [], (error, data) => {
+        if (error) {
+            return res.status(500).json({ error: 'Failed to fetch news' });
+        }
+        res.json(data);
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

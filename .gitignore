@@ -12,6 +12,9 @@ backend/tokenizer.json
 backend/tokenizer_config.json
 backend/training_args.bin
 back/*
+backend/*
+backend/package.json
+backend/package-lock.json
 
 front/node_modules
 # front/front/node_modules
