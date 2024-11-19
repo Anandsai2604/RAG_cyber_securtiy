@@ -46,7 +46,7 @@ if __name__ == "__main__":
     else:
         print("No articles extracted.")
 
-
+# FLASK
 # from flask import Flask, jsonify
 # import requests
 # from bs4 import BeautifulSoup
