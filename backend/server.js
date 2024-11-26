@@ -12,8 +12,8 @@ const port = 8000;
 app.use(bodyParser.json());
 app.use(cors());
 <<<<<<< HEAD
-const pythonExecutable = process.env.PYTHON_EXEC || 'C:\\Users\\Anand\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe';
-const scriptBasePath = process.env.SCRIPT_PATH || 'E:\\cyber\\backend\\';
+const pythonExecutable = process.env.PYTHON_EXEC || '';
+const scriptBasePath = process.env.SCRIPT_PATH || '';
 =======
 const pythonExecutable = process.env.PYTHON_EXEC || 'python.exe path;
 const scriptBasePath = process.env.SCRIPT_PATH || '';
