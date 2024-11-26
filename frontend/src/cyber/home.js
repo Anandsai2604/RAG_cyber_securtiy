@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './front1.css'; // Add CSS file for styling the components
+import './front1.css';
 
 const Front1 = () => {
     const [newsData, setNewsData] = useState([]);
@@ -9,15 +9,15 @@ const Front1 = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        axios.post('http://localhost:8080/news')
+        axios.post('http://127.0.0.1:8000/news')
             .then(response => {
-                setNewsData(response.data); 
-                setLoading(false);  
+                setNewsData(response.data);
+                setLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching news data:', error);
                 setError('Failed to fetch news. Please try again later.');
-                setLoading(false);  
+                setLoading(false);
             });
     }, []);
 
@@ -39,10 +39,24 @@ const Front1 = () => {
                     newsData.length > 0 ? (
                         newsData.map((newsItem, index) => (
                             <div key={index} className="news-item">
-                                <h2>{newsItem.title}</h2>
-                                {newsItem.image && <img src={newsItem.image} alt={newsItem.title} className="news-image" />}
-                                <p>{newsItem.description}</p>
-                                <a href={newsItem.url} target="_blank" rel="noopener noreferrer">Read more</a>
+                                <div className="news-content">
+                                    {newsItem.image && (
+                                        <div className="news-image-wrapper">
+                                            <img src={newsItem.image} alt={newsItem.header} className="news-image" />
+                                        </div>
+                                    )}
+                                    <div className="news-text">
+                                        <h2 className="news-title">
+                                            <a href={newsItem.link} target="_blank" rel="noopener noreferrer">
+                                                {newsItem.header}
+                                            </a>
+                                        </h2>
+                                        <p className="news-description">{newsItem.para}</p>
+                                        <a href={newsItem.link} target="_blank" rel="noopener noreferrer" className="read-more">
+                                            Read more
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         ))
                     ) : (

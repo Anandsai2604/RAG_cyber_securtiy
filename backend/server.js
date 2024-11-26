@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const { spawn } = require('child_process');
 const app = express();
-const port = 8080; 
+const port = 8000; 
 
 app.use(bodyParser.json());
 app.use(cors());
 const pythonExecutable = process.env.PYTHON_EXEC || 'C:\\Users\\Anand\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe';
-const scriptBasePath = process.env.SCRIPT_PATH || 'C:\\Users\\Anand\\Desktop\\cyber\\back\\back\\src\\serv\\';
+const scriptBasePath = process.env.SCRIPT_PATH || 'E:\\cyber\\backend\\';
 
 mongoose.connect('mongodb+srv://Anand:Anand+26042005@data.wlaczyu.mongodb.net/cybersec', {
     useNewUrlParser: true,
@@ -113,10 +113,10 @@ const executePythonScript = (scriptName, args = [], callback) => {
     });
 
     response.stderr.on('data', (data) => {
-        console.error(`Error from Python script: ${data}`);
+        console.error(`Error from Python script: ${data.toString()}`);
         if (!errorOccurred) {
             errorOccurred = true;
-            callback({ error: 'Internal Server Error: Error from Python script' });
+            callback({ error: `Error from Python script: ${data.toString()}` });
         }
     });
 
@@ -141,6 +141,7 @@ const executePythonScript = (scriptName, args = [], callback) => {
         }
     });
 };
+
 
 
 // // app.post('/save-chat', async (req, res) => {

@@ -29,6 +29,8 @@ with warnings.catch_warnings():
     import joblib
     import sys
     import json
+    import lightgbm as lgb
+
   
     # model_path = r"C:\Users\Anand\Desktop\cyber\back\back\src\serv\modelner\bert_model"
     # tokenizer_path = r"C:\Users\Anand\Desktop\cyber\back\back\src\serv\modelner\bert_tokenizer"
@@ -324,4 +326,4 @@ def rag():
 
 
 if __name__ == '__main__':
-    app.run(port=8080)
+    app.run(port=8000)
