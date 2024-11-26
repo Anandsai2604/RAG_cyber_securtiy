@@ -49,12 +49,12 @@
 .conversation-container {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    padding: 40px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     /* width: 100px; */
-    max-height: 60vh; /* Adjust this value to control the max height of the conversation */
+    max-height: 80vh; /* Adjust this value to control the max height of the conversation */
 }
 
 .message {
@@ -100,7 +100,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
     border-top: 1px solid #ddd;
     background-color: #f8f8f8;
     position: fixed;

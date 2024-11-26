@@ -37,6 +37,11 @@ with warnings.catch_warnings():
 
     bert_model_path = r"E:\cyber\back\back\src\serv\modelner\bert_model"
     tokenizer_path = r"E:\cyber\back\back\src\serv\modelner\bert_tokenizer"
+    try:
+        bert_model = BertForSequenceClassification.from_pretrained(bert_model_path)
+        tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
+    except Exception as e:
+        print(f"Error loading BERT model or tokenizer: {e}")
 
     bert_model = BertForSequenceClassification.from_pretrained(bert_model_path)
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
@@ -67,7 +72,7 @@ with warnings.catch_warnings():
     reverse_tag_mapping = {v: k for k, v in tag_mapping.items()}
 
 
-    file_path = r'E:\cyber\back\back\src\serv\json\qna_squad.json'
+    file_path = r'qa.json'
     question_vectors = []
     answers = []
 

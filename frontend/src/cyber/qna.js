@@ -13,10 +13,7 @@ const Main = () => {
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        if (!input) {
-            alert('Please select a model');
-            return;
-        }
+        
         if (!query) {
             alert('Please enter a query.');
             return;
@@ -29,7 +26,7 @@ const Main = () => {
         setError(null);
 
         try {
-            const response = await axios.post(`http://127.0.0.1:8000/${input}`, {
+            const response = await axios.post(`http://127.0.0.1:8000/rag`, {
                 input_sentence: query,  
             });
             console.log(response.data);
@@ -42,7 +39,7 @@ const Main = () => {
 
             setAnsData((prev) => [
                 ...prev,
-                { model: input, query: query, answer: aiResponse }
+                { query: query, answer: aiResponse }
             ]);
 
             setQuery('');
