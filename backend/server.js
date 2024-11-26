@@ -11,10 +11,15 @@ const port = 8000;
 
 app.use(bodyParser.json());
 app.use(cors());
+<<<<<<< HEAD
 const pythonExecutable = process.env.PYTHON_EXEC || 'C:\\Users\\Anand\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe';
 const scriptBasePath = process.env.SCRIPT_PATH || 'E:\\cyber\\backend\\';
+=======
+const pythonExecutable = process.env.PYTHON_EXEC || 'python.exe path;
+const scriptBasePath = process.env.SCRIPT_PATH || '';
+>>>>>>> be933727ec0a4dbdd3dcc96575726b48eb50dcd0
 
-mongoose.connect('mongodb+srv://Anand:Anand+26042005@data.wlaczyu.mongodb.net/cybersec', {
+mongoose.connect('mongodb+srv://dbname:<password>.wlaczyu.mongodb.net/cybersec', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -37,8 +42,8 @@ const User = mongoose.model('User', userSchema);
 const gen = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'kmitprojectschoolcrick@gmail.com',
-        pass: 'cfsa opfj slbg wsqs' 
+        user: '',
+        pass: '' 
     }
 });
 
@@ -67,7 +72,7 @@ app.post('/register', async (req, res) => {
         await user.save();
 
         const mailOptions = {
-            from: 'kmitprojectschoolcrick@gmail.com',
+            from: 'k',
             to: email,
             subject: 'Your OTP for registration is',
             text: `Your OTP is ${otp}. It is valid for 10 minutes`
